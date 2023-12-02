@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  openai_hub:
+    image: openai_hub:v1
+    env_file: .env
+    container_name: openai_hub
+    network_mode: "host"
+    volumes:
+      - ./:/workspace
+    ports:
+      - 80:80

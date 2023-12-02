@@ -1,0 +1,6 @@
+fastapi
+openai
+uvicorn
+scikit-image
+opencv_python
+python-multipart
