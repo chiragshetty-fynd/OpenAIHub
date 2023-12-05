@@ -1,7 +1,7 @@
 import os
 import cv2
-from skimage import io
 from openai import OpenAI
+from skimage import io as skio
 
 
 class Generator:
@@ -14,11 +14,13 @@ class Generator:
         self,
         prompt,
         img_path,
-        img_height=512,
-        img_width=512,
+        img_height=1024,
+        img_width=1024,
         quality="standard",
         model="dall-e-3",
     ):
+        
+        print(f'{prompt=}')
         response = self.client.images.generate(
             model=model,
             prompt=prompt,
@@ -26,8 +28,7 @@ class Generator:
             quality=quality,
             n=1,
         )
-        io.imsave(
-            img_path,
-            cv2.cvtColor(io.imread(response.data[0].url), cv2.COLOR_RGB2RGBA),
-        )
+        img = cv2.cvtColor(skio.imread(response.data[0].url), cv2.COLOR_RGB2RGBA)
+        img = cv2.resize(img, (512, 512))
+        skio.imsave(img_path, img)
         return img_path

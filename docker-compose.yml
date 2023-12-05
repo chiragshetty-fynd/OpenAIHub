@@ -6,7 +6,5 @@ services:
     env_file: .env
     container_name: openai_hub
     network_mode: "host"
-    volumes:
-      - ./:/workspace
     ports:
       - 80:80
