@@ -21,6 +21,7 @@ async def enhance_prompt(prompt: str = Form(...)):
 @app.post("/generate")
 async def dalle_generate(prompt: str = Form(...), img_path: str = Form(...)):
     try:
+        img_path = img_path.strip()
         enhanced_prompt = enhancer.enhance(prompt)
         img_path = generator.generate(enhanced_prompt, img_path)
         return {"generated_image": img_path}
@@ -35,6 +36,8 @@ async def dalle_inpaint(
     updated_img_path: str = Form(...),
 ):
     try:
+        img_path = img_path.strip()
+        updated_img_path = updated_img_path.strip()
         enhanced_prompt = enhancer.enhance(prompt)
         updated_img_path = inpainter.inpaint(
             enhanced_prompt, img_path, updated_img_path
