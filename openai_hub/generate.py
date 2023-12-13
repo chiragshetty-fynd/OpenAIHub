@@ -19,8 +19,7 @@ class Generator:
         quality="standard",
         model="dall-e-3",
     ):
-        
-        print(f'{prompt=}')
+        print(f"{prompt=}")
         response = self.client.images.generate(
             model=model,
             prompt=prompt,

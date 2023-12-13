@@ -22,20 +22,20 @@ class Inpainter:
         img_width=1024,
     ):
         mask_path = img_path.replace(".png", "_rgba.png")
-        print(f'{img_path=} {mask_path=} {prompt=}')
-        
+        print(f"{img_path=} {mask_path=} {prompt=}")
+
         img_buffer = io.BytesIO()
-        Image.open(img_path).resize((1024,1024)).save(img_buffer, format="PNG")
+        Image.open(img_path).resize((1024, 1024)).save(img_buffer, format="PNG")
 
         mask_buffer = io.BytesIO()
-        Image.open(mask_path).resize((1024,1024)).save(mask_buffer, format="PNG")
+        Image.open(mask_path).resize((1024, 1024)).save(mask_buffer, format="PNG")
         response = self.client.images.edit(
             image=img_buffer.getvalue(),
             mask=mask_buffer.getvalue(),
             prompt=prompt,
             model=model,
             n=1,
-            size=f"{img_height}x{img_width}"
+            size=f"{img_height}x{img_width}",
         )
 
         img = cv2.cvtColor(skio.imread(response.data[0].url), cv2.COLOR_RGB2RGBA)

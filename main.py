@@ -29,7 +29,7 @@ async def dalle_generate(prompt: str = Form(...), img_path: str = Form(...)):
 
 
 @app.post("/inpaint")
-async def dalle_generate(
+async def dalle_inpaint(
     prompt: str = Form(...),
     img_path: str = Form(...),
     updated_img_path: str = Form(...),
